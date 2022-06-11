@@ -54,12 +54,16 @@ def getImageLink(googleSearchResult):
         googleSearchResult = googleSearchResult.get("items")
     except BaseException as error:
         print("Exception in extracting image link : {}".format(error))
-        return convertor([])
+        return ""
+
+    if(googleSearchResult == []):
+        return ""
 
     try:
         imageLinks = list(map(getLinkFromResult, googleSearchResult))
     except BaseException as error:
-        raise error
+        return ""
+
 
     # convert to string
     return convertor(imageLinks)
@@ -69,6 +73,9 @@ def getDescription(googleSearchResult):
         googleSearchResult = googleSearchResult.get("items")
     except BaseException as error:
         print("Exception in extracting HTML : {}".format(error))
+        return ""
+
+    if(googleSearchResult == []):
         return ""
 
     try:
@@ -89,15 +96,15 @@ def googleImageSearch(search):
 # print(getLinkFromResult(sampleResult))
 
 # test googe image search - PASS
-print(
-    getImageLink(
-        googleSearch("caliburn", "image", num=1)
-    )
-)
+# print(
+#     getImageLink(
+#         googleSearch("OFRF nexMesh Subohm Tank Coils", "image", num=1)
+#     )
+# )
 
 # test googe text seatch - PASS
-print(
-    getDescription(
-        googleSearch("caliburn", num=1)
-    )
-)
+# print(
+#     getDescription(
+#         googleSearch("OFRF nexMesh Subohm Tank Coils", num=1)
+#     )
+# )

@@ -1,29 +1,42 @@
 import pandas as pd
 
-from image_search import googleSearch, googleImageSearch, getLinkFromResult, getDescription
+from image_search import getImageLink, googleSearch, googleImageSearch, getLinkFromResult, getDescription
 
 def description(text):
     if(text):
-        return getDescription(googleSearch(text))
+        return getDescription(googleSearch(text, num=1))
         # return text
     raise Exception("No description found")
 
 def image(text):
     if(text):
-        return googleImageSearch(text)
+        return getImageLink(googleSearch(text, "image", num=3))
         # return text
     return Exception("No image found")
+
+
+def filtered_data(filename):
+    df = pd.read_csv(filename)
+
+    # filter out rows with no description
+    df = df[df["Name"].notnull()]
+    df = df[df["Categories"].notnull()]
+
+    return df
+
     
 
-df = pd.read_csv("in.csv")
+df = filtered_data("hello.csv")
+print(df)
 
  
 df['Images'] = df['Name'] + " " + df['Categories']
 df['Description'] = df['Name'] + " " + df['Categories']
 print(df.head(5))
 
-df['Images'] = df['Images'].apply(image)
-df['Description'] = df['Description'].apply(description)
+
+# df['Images'] = df['Images'].apply(image)
+# df['Description'] = df['Description'].apply(description)
 print(df.head(5))
 
 df.to_csv('out.csv', index=False)
