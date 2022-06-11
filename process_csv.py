@@ -24,19 +24,18 @@ def filtered_data(filename):
 
     return df
 
-    
+def main():
+    df = filtered_data("in.csv")
 
-df = filtered_data("hello.csv")
-print(df)
+    df['Images'] = df['Name'] + " " + df['Categories']
+    df['Description'] = df['Name'] + " " + df['Categories']
+    print(df.head(5))
 
- 
-df['Images'] = df['Name'] + " " + df['Categories']
-df['Description'] = df['Name'] + " " + df['Categories']
-print(df.head(5))
+    df["Images"] = df["Images"].apply(image)
+    df["Description"] = df["Description"].apply(description)
+
+    df.to_csv('out.csv', index=False)
 
 
-# df['Images'] = df['Images'].apply(image)
-# df['Description'] = df['Description'].apply(description)
-print(df.head(5))
-
-df.to_csv('out.csv', index=False)
+if(__name__ == "__main__"):
+    main()
