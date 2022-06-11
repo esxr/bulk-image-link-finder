@@ -6,6 +6,12 @@
 ___
 ### Usage
 
+##### Set the `.env`
+```
+
+```
+
+##### Run the Program
 - run `pip install -r requirements.txt`
 - Place csv file inside folder and rename it to `in.csv'
 - run `python process_csv.py` and wait
