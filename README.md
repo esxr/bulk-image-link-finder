@@ -2,7 +2,8 @@
 
 ### Usecase
 - Imagine an online store with 2000 products.
-- You have to find relevant **google image links** for all the products
+- You have to add relevant **google image links** for all the products
+- You have to add relevant **descriptions** for all the products
 ___
 ### Usage
 
